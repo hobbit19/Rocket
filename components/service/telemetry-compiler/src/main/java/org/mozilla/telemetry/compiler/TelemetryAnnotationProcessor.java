@@ -2,10 +2,11 @@
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-package mozilla.debug.rocket.mozilla.org.telemetrycompiler;
+package org.mozilla.telemetry.compiler;
 
-import org.mozilla.components.telemetry.annotation.TelemetryDoc;
-import org.mozilla.components.telemetry.annotation.TelemetryExtra;
+
+import org.mozilla.telemetry.annotation.TelemetryDoc;
+import org.mozilla.telemetry.annotation.TelemetryExtra;
 
 import java.io.File;
 import java.io.FileNotFoundException;

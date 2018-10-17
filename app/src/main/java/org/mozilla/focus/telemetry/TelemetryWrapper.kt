@@ -14,8 +14,6 @@ import android.content.Context
 import android.os.StrictMode
 import android.preference.PreferenceManager
 import android.webkit.PermissionRequest
-import org.mozilla.components.telemetry.annotation.TelemetryDoc
-import org.mozilla.components.telemetry.annotation.TelemetryExtra
 import org.mozilla.focus.BuildConfig
 import org.mozilla.focus.Inject
 import org.mozilla.focus.R
@@ -34,6 +32,8 @@ import org.mozilla.focus.utils.Settings
 import org.mozilla.rocket.theme.ThemeManager
 import org.mozilla.telemetry.Telemetry
 import org.mozilla.telemetry.TelemetryHolder
+import org.mozilla.telemetry.annotation.TelemetryDoc
+import org.mozilla.telemetry.annotation.TelemetryExtra
 import org.mozilla.telemetry.config.TelemetryConfiguration
 import org.mozilla.telemetry.event.TelemetryEvent
 import org.mozilla.telemetry.measurement.DefaultSearchMeasurement
