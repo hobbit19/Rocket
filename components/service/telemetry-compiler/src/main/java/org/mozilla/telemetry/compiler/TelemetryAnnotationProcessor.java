@@ -45,11 +45,6 @@ public class TelemetryAnnotationProcessor extends AbstractProcessor {
     }
 
     @Override
-    public synchronized void init(ProcessingEnvironment processingEnv) {
-        super.init(processingEnv);
-    }
-
-    @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment env) {
         Collection<? extends Element> annotatedElements =
                 env.getElementsAnnotatedWith(TelemetryDoc.class);
