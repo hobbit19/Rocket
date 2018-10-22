@@ -28,8 +28,8 @@ import javax.tools.Diagnostic;
 public class TelemetryAnnotationProcessor extends AbstractProcessor {
 
     private static final String FILE_MAPPING = "amplitdue.json";
-    final String FILE_README = "./docs/events.md";          // tracked
-    final String FILE_CSV = "./app/build/amplitude.csv";    // not tracked
+    static final String FILE_README = "./docs/events.md";          // tracked
+    static final String FILE_CSV = "./app/build/amplitude.csv";    // not tracked
 
 
     @Override
@@ -76,6 +76,9 @@ public class TelemetryAnnotationProcessor extends AbstractProcessor {
         if (file.exists()) {
             file.delete();
         }
+        File directory = new File(file.getParentFile().getAbsolutePath());
+        directory.mkdirs();
+
 
         final PrintWriter printWriter = new PrintWriter(new FileOutputStream(file, true));
         StringBuffer sb = new StringBuffer().append(header);
