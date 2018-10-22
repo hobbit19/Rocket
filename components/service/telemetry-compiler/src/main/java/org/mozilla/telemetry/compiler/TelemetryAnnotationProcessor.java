@@ -31,6 +31,18 @@ public class TelemetryAnnotationProcessor extends AbstractProcessor {
     static final String FILE_README = "./docs/events.md";          // tracked
     static final String FILE_CSV = "./app/build/amplitude.csv";    // not tracked
 
+    // TODO: TelemetryEvent's fields are private, I'll create a PR to make them public so I can
+    // test the ping format in compile time.
+    static class TelemetryEventConstant {
+        private static final int MAX_LENGTH_CATEGORY = 30;
+        private static final int MAX_LENGTH_METHOD = 20;
+        private static final int MAX_LENGTH_OBJECT = 20;
+        private static final int MAX_LENGTH_VALUE = 80;
+        private static final int MAX_EXTRA_KEYS = 200;
+        private static final int MAX_LENGTH_EXTRA_KEY = 15;
+        private static final int MAX_LENGTH_EXTRA_VALUE = 80;
+    }
+
 
     @Override
     public SourceVersion getSupportedSourceVersion() {
@@ -92,6 +104,7 @@ public class TelemetryAnnotationProcessor extends AbstractProcessor {
         for (Element type : annotatedElements) {
             if (type.getKind() == ElementKind.METHOD) {
                 final TelemetryDoc annotation = type.getAnnotation(TelemetryDoc.class);
+                verifyEventFormat(annotation);
 
                 sb.append(start).append(annotation.name()).append(separator)
                         .append(annotation.action()).append(separator)
@@ -114,5 +127,39 @@ public class TelemetryAnnotationProcessor extends AbstractProcessor {
 
 
         printWriter.close();
+    }
+
+    private void verifyEventFormat(TelemetryDoc annotation) {
+        final String action = annotation.action();
+        if (action.length() > TelemetryEventConstant.MAX_LENGTH_CATEGORY) {
+            throw new IllegalArgumentException("The length of action is too long:" + action);
+        }
+        final String method = annotation.method();
+        if (method.length() > TelemetryEventConstant.MAX_LENGTH_METHOD) {
+            throw new IllegalArgumentException("The length of method is too long:" + method);
+        }
+        final String object = annotation.object();
+        if (object.length() > TelemetryEventConstant.MAX_LENGTH_OBJECT) {
+            throw new IllegalArgumentException("The length of object is too long:" + object);
+        }
+        final String value = annotation.value();
+        if (value.length() > TelemetryEventConstant.MAX_LENGTH_VALUE) {
+            throw new IllegalArgumentException("The length of value is too long:" + value);
+        }
+        final TelemetryExtra[] extras = annotation.extras();
+        if (extras.length > TelemetryEventConstant.MAX_EXTRA_KEYS) {
+            throw new IllegalArgumentException("Too many extras");
+        }
+        for (TelemetryExtra extra : extras) {
+            final String eName = extra.name();
+            final String eVal = extra.value();
+            if (eName.length() > TelemetryEventConstant.MAX_LENGTH_EXTRA_KEY) {
+                throw new IllegalArgumentException("The length of extra name is too long:" + eName);
+            }
+            if (eVal.length() > TelemetryEventConstant.MAX_LENGTH_VALUE) {
+                throw new IllegalArgumentException("The length of extra name is too long:" + eVal);
+            }
+        }
+
     }
 }
