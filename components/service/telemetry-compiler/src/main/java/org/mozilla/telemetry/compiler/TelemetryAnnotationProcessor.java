@@ -154,10 +154,10 @@ public class TelemetryAnnotationProcessor extends AbstractProcessor {
             final String eName = extra.name();
             final String eVal = extra.value();
             if (eName.length() > TelemetryEventConstant.MAX_LENGTH_EXTRA_KEY) {
-                throw new IllegalArgumentException("The length of extra name is too long:" + eName);
+                throw new IllegalArgumentException("The length of extra key is too long:" + eName);
             }
             if (eVal.length() > TelemetryEventConstant.MAX_LENGTH_VALUE) {
-                throw new IllegalArgumentException("The length of extra name is too long:" + eVal);
+                throw new IllegalArgumentException("The length of extra value is too long:" + eVal);
             }
         }
 
