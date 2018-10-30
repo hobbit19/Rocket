@@ -26,7 +26,6 @@ import org.mozilla.focus.utils.AppConstants;
 import org.mozilla.focus.utils.DialogUtils;
 import org.mozilla.focus.utils.FirebaseHelper;
 import org.mozilla.focus.utils.Settings;
-import org.mozilla.rocket.nightmode.AdjustBrightnessDialog;
 import org.mozilla.focus.widget.DefaultBrowserPreference;
 
 import java.util.Locale;
@@ -71,7 +70,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
             final Intent intent = InfoActivity.getAboutIntent(getActivity());
             startActivity(intent);
         } else if (keyClicked.equals(resources.getString(R.string.pref_key_night_mode_brightness))) {
-            startActivity(AdjustBrightnessDialog.Intents.INSTANCE.getStartIntentFromSetting(getActivity()));
+            startActivity(org.mozilla.rocket.nightmode.Intent.Companion.getNightModeBrightnessIntent(true));
         }
 
         return super.onPreferenceTreeClick(preferenceScreen, preference);

@@ -702,7 +702,7 @@ public class MainActivity extends BaseActivity implements FragmentListener,
             if (currentBrightness == BRIGHTNESS_OVERRIDE_NONE) {
                 // First time turn on
                 settings.setNightModeBrightnessValue(AdjustBrightnessDialog.Constants.DEFAULT_BRIGHTNESS);
-                startActivity(AdjustBrightnessDialog.Intents.INSTANCE.getStartIntentFromMenu(this));
+                startActivity(org.mozilla.rocket.nightmode.Intent.Companion.getNightModeBrightnessIntent(false));
             } else {
                 layoutParams.screenBrightness = currentBrightness;
                 getWindow().setAttributes(layoutParams);
