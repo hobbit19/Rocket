@@ -233,7 +233,7 @@ dependencies {
     implementation "org.mozilla.components:ui-autocomplete:${Versions.android_components}"
 
     implementation "com.adjust.sdk:adjust-android:${Versions.adjust}"
-    implementation "com.google.android.gms:play-services-analytics:${Versions.firebase}"
+    implementation "com.google.android.gms:play-services-analytics:${Versions.firebase}" // Required by Adjust
     // Required by Adjust
 
     implementation "com.airbnb.android:lottie:${Versions.lottie}"

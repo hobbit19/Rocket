@@ -37,7 +37,7 @@ public class TelemetryAnnotationProcessorTest {
                                         "}",
                                 "}"
                         )).generatedFiles();
-        assert (telemetryWrapper.size() > 0);
+        assert (telemetryWrapper.size() == 1);
         assert (new File(TelemetryAnnotationProcessor.FILE_README).exists());
     }
 
@@ -63,12 +63,7 @@ public class TelemetryAnnotationProcessorTest {
                                         "}",
                                 "}"
                         )).generatedFiles();
-        assert (telemetryWrapper.size() > 0);
-    }
-
-    @org.junit.Test
-    public void getSupportedSourceVersion() {
-        assert (new TelemetryAnnotationProcessor().getSupportedSourceVersion() == SourceVersion.latestSupported());
+        assert (telemetryWrapper.size() == 1);
     }
 
     @org.junit.Test

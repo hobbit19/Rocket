@@ -54,6 +54,8 @@ object TelemetryWrapper {
     private val TOOL_BAR_CAPTURE_TELEMETRY_VERSION = 3
     private val RATE_APP_NOTIFICATION_TELEMETRY_VERSION = 2
     private val DEFAULT_BROWSER_NOTIFICATION_TELEMETRY_VERSION = 2
+    private const val SEARCHCLEAR_TELEMETRY_VERSION = "2"
+
 
     internal object Category {
         const val ACTION = "action"
@@ -83,8 +85,6 @@ object TelemetryWrapper {
         const val SAVE = "save"
         const val COPY = "copy"
         const val OPEN = "open"
-        const val INTENT_URL = "intent_url"
-        const val TEXT_SELECTION_INTENT = "text_selection_intent"
         const val SHOW = "show"
         const val LAUNCH = "launch"
     }
@@ -1078,10 +1078,12 @@ object TelemetryWrapper {
             method = Method.CLEAR,
             `object` = Object.SEARCH_BAR,
             value = "",
-            extras = [])
+            extras = [TelemetryExtra(name = Extra.VERSION, value = SEARCHCLEAR_TELEMETRY_VERSION)])
     @JvmStatic
     fun searchClear() {
-        EventBuilder(Category.ACTION, Method.CLEAR, Object.SEARCH_BAR).queue()
+        EventBuilder(Category.ACTION, Method.CLEAR, Object.SEARCH_BAR)
+                .extra(Extra.VERSION, SEARCHCLEAR_TELEMETRY_VERSION)
+                .queue()
     }
 
     @TelemetryDoc(
@@ -1090,10 +1092,12 @@ object TelemetryWrapper {
             method = Method.CANCEL,
             `object` = Object.SEARCH_BAR,
             value = "",
-            extras = [])
+            extras = [TelemetryExtra(name = Extra.VERSION, value = SEARCHCLEAR_TELEMETRY_VERSION)])
     @JvmStatic
     fun searchDismiss() {
-        EventBuilder(Category.ACTION, Method.CANCEL, Object.SEARCH_BAR).queue()
+        EventBuilder(Category.ACTION, Method.CANCEL, Object.SEARCH_BAR)
+                .extra(Extra.VERSION, SEARCHCLEAR_TELEMETRY_VERSION)
+                .queue()
     }
 
     @TelemetryDoc(
